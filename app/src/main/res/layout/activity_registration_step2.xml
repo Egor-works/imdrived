@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Заголовок "Регистрация" -->
+    <TextView
+        android:id="@+id/tvRegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создать аккаунт"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Метка для Фамилии -->
+    <TextView
+        android:id="@+id/tvLastNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Фамилия"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода фамилии -->
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Введите фамилию"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@id/tvLastNameLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"/>
+
+    <!-- Метка для Имени -->
+    <TextView
+        android:id="@+id/tvFirstNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Имя"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etLastName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода имени -->
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Введите имя"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@id/tvFirstNameLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"/>
+
+    <!-- Метка для Имени -->
+    <TextView
+        android:id="@+id/tvMiddleNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Отчество"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etFirstName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода отчества -->
+    <EditText
+        android:id="@+id/etMiddleName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Введите отчество"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@id/tvMiddleNameLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"/>
+
+    <!-- Метка для Даты Рождения -->
+    <TextView
+        android:id="@+id/tvBirthDateLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Дата рождения"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etMiddleName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода даты рождения -->
+    <EditText
+        android:id="@+id/etBirthDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Дата рождения (MM/DD/YYYY)"
+        android:inputType="none"
+        app:layout_constraintTop_toBottomOf="@id/tvBirthDateLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"/>
+
+    <!-- Радио-группа для выбора пола -->
+    <RadioGroup
+        android:id="@+id/rgGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/etBirthDate"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp">
+
+        <!-- Радио-кнопка "Мужской" -->
+        <RadioButton
+            android:id="@+id/rbMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Мужской"/>
+
+        <!-- Радио-кнопка "Женский" -->
+        <RadioButton
+            android:id="@+id/rbFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Женский"
+            android:layout_marginStart="16dp"/>
+    </RadioGroup>
+
+    <!-- Кнопка "Далее" -->
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/rgGender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Кнопка "Назад" -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        app:layout_constraintTop_toBottomOf="@id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

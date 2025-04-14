@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clSuccessBooking"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Верхняя панель с надписью "Удачной поездки" -->
+    <TextView
+        android:id="@+id/tvTopMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Удачной поездки"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#101828"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Иконка для добавления фото профиля (необязательное поле) -->
+    <ImageView
+        android:id="@+id/ivSuccessPicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_success"
+        android:contentDescription="Фото профиля"
+        app:layout_constraintTop_toBottomOf="@id/tvTopMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Основной заголовок успешного бронирования -->
+
+    <!-- Нижний блок с навигацией -->
+    <TextView
+        android:id="@+id/tvSuccessMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Бронирование успешно создано"
+        android:textColor="#101828"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivSuccessPicture" />
+
+    <LinearLayout
+        android:id="@+id/llBottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp">
+
+        <!-- Небольшой текст для перехода к своим бронированиям -->
+        <TextView
+            android:id="@+id/tvGoToBookings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Перейти к своим бронированиям"
+            android:textSize="14sp"
+            android:textColor="@color/purple_500"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center"/>
+
+        <!-- Кнопка перехода на главный экран -->
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Далее"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/purple_500"
+            app:cornerRadius="16dp"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

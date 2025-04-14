@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Transmission options: Automatic and Manual -->
+    <string-array name="transmission_options">
+        <item>Трансмиссия</item>
+        <item>Автомат</item>
+        <item>Механика</item>
+    </string-array>
+</resources>

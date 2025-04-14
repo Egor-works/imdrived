@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Изображение автомобиля -->
+        <ImageView
+            android:id="@+id/ivCarImage"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_car"/>
+
+        <!-- Информация об автомобиле -->
+        <TextView
+            android:id="@+id/tvCarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Марка, Модель"
+            android:textColor="#0D0D0D"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvCarPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Цена: 1000 руб/час"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/tvCarSpecs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Бензин, А/Т"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"/>
+
+        <!-- Кнопки действий -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btnBook"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Забронировать"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Детали"
+                app:strokeColor="#2A1246"
+                app:strokeWidth="2px"
+                app:cornerRadius="8dp"
+                android:textColor="#344054"
+                android:backgroundTint="@color/white"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

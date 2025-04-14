@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Иконка, символизирующая отсутствие интернета -->
+    <ImageView
+        android:id="@+id/ivNoInternetIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_no_internet"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/tvMainMessage"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginBottom="16dp"/>
+
+    <!-- Основное сообщение об отсутствии интернета -->
+    <TextView
+        android:id="@+id/tvMainMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Нет подключения к интернету"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivNoInternetIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Дополнительное сообщение с рекомендацией -->
+    <TextView
+        android:id="@+id/tvSubMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Проверьте подключение и повторите попытку"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvMainMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Кнопка "Повторить попытку" -->
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Повторить попытку"
+        app:layout_constraintTop_toBottomOf="@id/tvSubMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

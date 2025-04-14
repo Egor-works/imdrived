@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Заголовок "Регистрация" -->
+    <TextView
+        android:id="@+id/tvRegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создать аккаунт"
+        android:textColor="#1A1A1A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Иконка для добавления фото профиля (необязательное поле) -->
+    <ImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_profile_placeholder"
+        android:contentDescription="Фото профиля"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Описание загрузки -->
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Добавление фотографии поможет владельцам и арендаторам узнать друг друга, когда они будут забирать машину"
+        android:textColor="#1A1A1A"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Метка для Водительского удостверения -->
+    <TextView
+        android:id="@+id/tvLicenseNumberLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Номер водительского удостоверения"
+        android:textColor="#404040"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Поле ввода номера водительского удостоверения (обязательное) -->
+    <EditText
+        android:id="@+id/etLicenseNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="00000000000"
+        android:textColor="#667085"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/tvLicenseNumberLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"/>
+
+    <!-- Метка для Водительского удостверения -->
+    <TextView
+        android:id="@+id/tvIssueDateLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Дата выдачи"
+        android:textColor="#404040"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etLicenseNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Поле ввода даты выдачи (обязательное, формат DD/MM/YYYY) -->
+    <EditText
+        android:id="@+id/etIssueDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="DD/MM/YYYY"
+        android:textColor="#667085"
+        android:inputType="none"
+        app:layout_constraintTop_toBottomOf="@id/tvIssueDateLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp"/>
+
+    <!-- Метка для Загрузки фото -->
+    <TextView
+        android:id="@+id/tvUploadLicenseLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Загрузите фото водительского удостоверения"
+        android:textColor="#404040"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etIssueDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Кнопка "Загрузить фото" для водительского удостоверения -->
+    <Button
+        android:id="@+id/btnUploadLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_upload"
+        app:iconTint="@null"
+        app:iconPadding="8dp"
+        android:background="@android:color/transparent"
+        android:text="Загрузить фото"
+        android:textColor="#667085"
+        app:layout_constraintTop_toBottomOf="@id/tvUploadLicenseLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <!-- Метка для Загрузки фото -->
+    <TextView
+        android:id="@+id/tvUploadPassportLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Загрузите фото паспорта"
+        android:textColor="#404040"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/btnUploadLicense"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Кнопка "Загрузить фото" для паспорта -->
+    <Button
+        android:id="@+id/btnUploadPassport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Загрузить фото"
+        android:textColor="#667085"
+        android:background="@android:color/transparent"
+        app:icon="@drawable/ic_upload"
+        app:iconTint="@null"
+        app:iconPadding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvUploadPassportLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"/>
+
+    <!-- Кнопка "Далее": активна только после заполнения обязательных полей и загрузки фото -->
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        android:enabled="false"
+        app:layout_constraintTop_toBottomOf="@id/btnUploadPassport"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Кнопка "Назад" -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        app:layout_constraintTop_toBottomOf="@id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

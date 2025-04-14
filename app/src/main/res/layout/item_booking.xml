@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Информация об автомобиле (марка и модель) -->
+    <TextView
+        android:id="@+id/tvCarInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Марка и модель"
+        android:textColor="#121417"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Дата аренды -->
+    <TextView
+        android:id="@+id/tvDateInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Дата аренды"
+        android:textColor="#637587"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tvCarInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

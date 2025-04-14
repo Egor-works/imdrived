@@ -1,0 +1,7 @@
+<resources>
+    <!-- Тема для экрана загрузки -->
+    <style name="Theme.App.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+</resources>
+

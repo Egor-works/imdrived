@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31">
+
+        <!-- Экран загрузки (Splash Screen) -->
+        <activity
+            android:name=".app.src.kotlin.client.splash.SplashActivity"
+            android:theme="@style/Theme.App.Splash"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- Здесь будут другие активности (например, LoginActivity, MainActivity) -->
+        <!-- Экран выбора действия (вход/регистрация) -->
+        <activity android:name=".app.src.kotlin.client.auth.UserAccessActivity" />
+
+        <!-- Экран авторизации -->
+        <activity android:name=".app.src.kotlin.client.login.LoginActivity" />
+
+        <!-- Экран регистрации -->
+        <activity android:name=".app.src.kotlin.client.register.RegisterActivity" />
+
+        <!-- Экран регистрации 2 шаг-->
+        <activity android:name=".app.src.kotlin.client.register.RegistrationStep2Activity" />
+
+        <!-- Экран регистрации 3 шаг-->
+        <activity android:name=".app.src.kotlin.client.register.RegistrationStep3Activity" />
+
+        <!-- Экран Успешной регистрации-->
+        <activity android:name=".app.src.kotlin.client.register.SuccessActivity" />
+
+        <!-- Главный экран -->
+        <activity android:name=".app.src.kotlin.client.main.MainActivity" />
+
+        <!-- Экран отсутсвия соединения -->
+        <activity android:name=".app.src.kotlin.client.error.NoInternetActivity" />
+
+        <!-- Экран Онбординга -->
+        <activity android:name=".app.src.kotlin.client.onboarding.OnboardingActivity" />
+
+        <!-- Экран Настроек -->
+        <activity android:name=".app.src.kotlin.client.settings.SettingsActivity" />
+
+        <!-- Экран Профиля -->
+        <activity android:name=".app.src.kotlin.client.profile.ProfileActivity" />
+
+        <!-- Экран Поиска -->
+        <activity android:name=".app.src.kotlin.client.search.SearchResultsActivity"/>
+
+        <!-- Экран Детали -->
+        <activity android:name=".app.src.kotlin.client.details.CarDetailsActivity"/>
+
+        <!-- Экран Оформления Аренды -->
+        <activity android:name=".app.src.kotlin.client.rental.RentCarActivity"/>
+
+        <!-- Экран Успешного оформления аренды -->
+        <activity android:name=".app.src.kotlin.client.rental.SuccessBookingActivity"/>
+
+        <!-- Экран Мои бронирования -->
+        <activity android:name=".app.src.kotlin.client.bookings.MyBookingsActivity"/>
+
+        <!-- Экран Детальная информация о бронировании -->
+        <activity android:name=".app.src.kotlin.client.bookings.BookingDetailsActivity"/>
+
+        <!-- Экран Избранное -->
+        <activity android:name=".app.src.kotlin.client.favorite.FavoriteActivity"/>
+
+        <activity android:name=".app.src.kotlin.client.lessor.ConnectCarActivity"/>
+
+        <activity android:name=".app.src.kotlin.client.lessor.AddCarStep1Activity"/>
+
+        <activity android:name=".app.src.kotlin.client.lessor.AddCarStep2Activity"/>
+
+        <activity android:name=".app.src.kotlin.client.lessor.AddCarStep3Activity"/>
+
+        <activity android:name=".app.src.kotlin.client.lessor.FinalConnectCarActivity"/>
+
+
+    </application>
+
+</manifest>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Верхняя панель -->
+    <LinearLayout
+        android:id="@+id/llTopBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Назад" />
+
+        <TextView
+            android:id="@+id/tvBookingId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Бронирование #123"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#101828"
+            android:gravity="center"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Информация об авто -->
+    <ImageView
+        android:id="@+id/ivCarImage"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_car"
+        android:contentDescription="Фото автомобиля"
+        app:layout_constraintTop_toBottomOf="@id/llTopBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCarDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Марка, Название автомобиля"
+        android:textColor="#0D0D0D"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/ivCarImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Общая информация -->
+    <LinearLayout
+        android:id="@+id/llInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvCarDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Строки с двумя колонками -->
+        <!-- Адрес -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Адрес:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvCarLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Неизвестен"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Начало аренды -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Начало аренды:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvStartDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="01.01.2025"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Конец аренды -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Конец аренды:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvEndDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="07.01.2025"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- ФИО водителя -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ФИО водителя:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvDriverName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Иванов Иван Иванович"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Номер ВУ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Номер ВУ:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvDriverLicense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1234567890"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Статус -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Статус:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvBookingStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Одобрено"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Стоимость аренды -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvRentalCostLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Аренда за 3 дня:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvRentalCost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1000 ₽"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Страховка -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvInsuranceCostLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Страховка за 3 дня:"
+                android:padding="5dp"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tvInsuranceCost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="500 ₽"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:gravity="end"/>
+        </LinearLayout>
+
+        <!-- Общая сумма -->
+        <LinearLayout
+            android:id="@+id/llTotalCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F9F5FF"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Общая сумма:"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvTotalCost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="1500 ₽"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="end"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Кнопка отмены бронирования -->
+    <Button
+        android:id="@+id/btnCancelBooking"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Отменить бронирование"
+        android:layout_marginTop="24dp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/design_default_color_error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clCarDetails"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <!-- Верхняя панель -->
+    <LinearLayout
+        android:id="@+id/llTopBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp">
+
+        <!-- Назад -->
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Назад" />
+
+        <!-- Заголовок -->
+        <TextView
+            android:id="@+id/tvScreenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Детали"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <!-- Избранное -->
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_heart"
+            android:contentDescription="Добавить в избранное" />
+    </LinearLayout>
+
+    <!-- Прогрессбар -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintTop_toBottomOf="@+id/llTopBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
+
+    <!-- Основной контент -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/llBottomBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llTopBar">
+
+        <LinearLayout
+            android:id="@+id/llCarDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Изображение авто -->
+            <ImageView
+                android:id="@+id/ivCarImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="Фото автомобиля"
+                android:scaleType="centerCrop" />
+
+            <!-- Название модели -->
+            <TextView
+                android:id="@+id/tvCarTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Название автомобиля"
+                android:textColor="#1A1A1A"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Адрес -->
+            <TextView
+                android:id="@+id/tvCarLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Адрес нахождения"
+                android:textColor="#404040"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvCarLocationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@drawable/ic_loc"
+                android:drawablePadding="30dp"
+                android:text="Адрес"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp" />
+
+            <!-- Описание -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:text="Описание"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvCarDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:text="Описание автмоболия"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Нижняя панель с ценой и кнопкой -->
+    <LinearLayout
+        android:id="@+id/llBottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/llBottomNavigation">
+
+        <!-- Цена -->
+        <TextView
+            android:id="@+id/tvCarPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="₽1000/час"
+            android:textColor="#1A1A1A"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Кнопка брони -->
+        <Button
+            android:id="@+id/btnBookCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Забронировать"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <!-- Нижняя навигационная панель -->
+    <LinearLayout
+        android:id="@+id/llBottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_home"
+            android:contentDescription="Домой" />
+
+        <ImageButton
+            android:id="@+id/btnFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite"
+            android:contentDescription="Избранное" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="Настройки" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

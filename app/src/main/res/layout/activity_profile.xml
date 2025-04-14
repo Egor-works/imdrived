@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clProfileRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Заголовок "Профиль" -->
+    <TextView
+        android:id="@+id/tvProfileTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Профиль"
+        android:textColor="#101828"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Аватар пользователя -->
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_profile_placeholder"
+        android:contentDescription="Аватар пользователя"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@id/tvProfileTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <!-- ФИО пользователя -->
+    <TextView
+        android:id="@+id/tvUserFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Иванов Иван Иванович"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/ivAvatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Панель с информацией профиля -->
+    <LinearLayout
+        android:id="@+id/llProfileInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvUserFullName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <!-- Поле "Электронная почта" -->
+        <LinearLayout
+            android:id="@+id/llEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvLabelEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Электронная почта"
+                android:textSize="16sp"
+                android:textColor="#29183B" />
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="example@mail.com"
+                android:textSize="14sp"
+                android:textColor="#ADB5BD"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Поле "Пароль" -->
+        <LinearLayout
+            android:id="@+id/llPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvLabelPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пароль"
+                android:textSize="16sp"
+                android:textColor="#29183B" />
+            <TextView
+                android:id="@+id/tvChangePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сменить пароль"
+                android:textSize="14sp"
+                android:textColor="#ADB5BD"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Поле "Пол" -->
+        <LinearLayout
+            android:id="@+id/llGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvLabelGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пол"
+                android:textSize="16sp"
+                android:textColor="#29183B" />
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Мужской"
+                android:textSize="14sp"
+                android:textColor="#ADB5BD"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Поле "Google" -->
+        <LinearLayout
+            android:id="@+id/llGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvLabelGoogle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google"
+                android:textSize="16sp"
+                android:textColor="#29183B" />
+            <TextView
+                android:id="@+id/tvGoogleEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="google@mail.com"
+                android:textSize="14sp"
+                android:textColor="#ADB5BD"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Поле "Выйти из профиля" -->
+        <LinearLayout
+            android:id="@+id/llSignOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/tvSignOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выйти из профиля"
+                android:textSize="16sp"
+                android:textColor="#FF0000" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Нижняя навигационная панель -->
+    <LinearLayout
+        android:id="@+id/llBottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp">
+
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_home"
+            android:contentDescription="Домой" />
+
+        <ImageButton
+            android:id="@+id/btnFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite"
+            android:contentDescription="Избранное" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="Настройки" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

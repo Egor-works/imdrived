@@ -1,0 +1,11 @@
+<!-- res/drawable/btn_register_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Белый фон -->
+    <solid android:color="@color/white" />
+    <!-- Черная обводка -->
+    <stroke
+        android:width="1dp"
+        android:color="@android:color/black" />
+    <!-- Скругление углов (опционально) -->
+    <corners android:radius="8dp" />
+</shape>

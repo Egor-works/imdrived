@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clMainRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Верхняя область с розоватым фоном -->
+    <LinearLayout
+        android:id="@+id/llTopArea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp"
+        android:background="#F9F5FF"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <!-- Белое поле поиска с иконкой лупы -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <!-- Иконка лупы -->
+                <ImageButton
+                    android:id="@+id/ivSearchIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_loop"
+                    android:layout_gravity="center_vertical" />
+
+                <!-- Поле ввода -->
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:hint="Введите марку автомобиля"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Текст "Давайте найдём автомобиль" -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Давайте найдём автомобиль"
+        android:textSize="16sp"
+        android:textColor="#1A1A1A"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+
+    <!-- Область для списка автомобилей (белый фон) -->
+<FrameLayout
+android:id="@+id/flListContainer"
+android:layout_width="0dp"
+android:layout_height="0dp"
+android:background="@android:color/white"
+app:layout_constraintTop_toBottomOf="@id/llTopArea"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent">
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvCars"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</FrameLayout>
+
+    <!-- Индикатор загрузки -->
+<ProgressBar
+android:id="@+id/progressBar"
+style="?android:attr/progressBarStyleLarge"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:visibility="gone"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Блок с сообщением об ошибке и кнопкой повторной попытки -->
+<LinearLayout
+android:id="@+id/layoutError"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:padding="16dp"
+android:gravity="center"
+android:visibility="gone"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent">
+
+<TextView
+    android:id="@+id/tvErrorMessage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Не удалось загрузить данные. Попробуйте снова."
+    android:textSize="16sp"
+    android:textColor="@android:color/holo_red_dark"
+    android:layout_marginBottom="12dp"/>
+
+<Button
+    android:id="@+id/btnRetry"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Повторить попытку"/>
+</LinearLayout>
+
+<!-- Нижняя навигационная панель -->
+<LinearLayout
+    android:id="@+id/llBottomNavigation"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <ImageButton
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_home"
+        android:contentDescription="Домой" />
+
+    <ImageButton
+        android:id="@+id/btnFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_favorite"
+        android:contentDescription="Избранное" />
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_settings"
+        android:contentDescription="Настройки" />
+</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

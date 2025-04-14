@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Заголовок "Успеха регистрации" -->
+    <TextView
+        android:id="@+id/tvSuccessTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Пользуйтесь с удовольствием"
+        android:textColor="#101828"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Иконка для добавления фото профиля (необязательное поле) -->
+    <ImageView
+        android:id="@+id/ivSuccessPicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_success"
+        android:contentDescription="Фото профиля"
+        app:layout_constraintTop_toBottomOf="@id/tvSuccessTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Заголовок "Поздравляем" -->
+    <TextView
+        android:id="@+id/tvSuccessCongr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Поздравляем"
+        android:textColor="#101828"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/ivSuccessPicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Текстовое сообщение поздравления -->
+    <TextView
+        android:id="@+id/tvCongratulations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Вы успешно зарегистрировались. Обработка ваших персональных данных займет около двух часов. Спасибо за ожидание."
+        android:textSize="18sp"
+        android:textColor="#1A1A1A"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tvSuccessCongr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Кнопка "Далее" для перехода на главный экран -->
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        app:layout_constraintTop_toBottomOf="@id/tvCongratulations"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="90dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

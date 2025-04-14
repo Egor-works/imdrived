@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Заголовок "Регистрация" -->
+    <TextView
+        android:id="@+id/tvRegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создать аккаунт"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Метка для Email -->
+    <TextView
+        android:id="@+id/tvEmailLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Электронная почта"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода электронной почты -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:minHeight="48dp"
+        android:layout_height="wrap_content"
+        android:hint="Введите электронную почту"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp" />
+
+    <!-- Метка для пароля -->
+    <TextView
+        android:id="@+id/tvPasswordLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Пароль"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода пароля с иконкой для показа/скрытия -->
+    <RelativeLayout
+        android:id="@+id/rlPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvPasswordLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:minHeight="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите пароль"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:id="@+id/ivTogglePassword"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_eye"
+        android:contentDescription="Показать/Скрыть пароль"
+        />
+    </RelativeLayout>
+
+    <!-- Метка для повтора пароля -->
+    <TextView
+        android:id="@+id/tvRepeatPasswordLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Повторите пароль"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/rlPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Поле ввода подтверждения пароля с иконкой для показа/скрытия -->
+    <RelativeLayout
+        android:id="@+id/rlRepeatPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvRepeatPasswordLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="2dp">
+
+        <EditText
+            android:id="@+id/etRepeatPassword"
+            android:minHeight="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите пароль"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:id="@+id/ivToggleRepeatPassword"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_eye"
+            android:contentDescription="Показать/Скрыть пароль" />
+    </RelativeLayout>
+
+    <!-- Чекбокс согласия с условиями -->
+    <CheckBox
+        android:id="@+id/cbAgreement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Я согласен с условиями обслуживания и политикой конфиденциальности"
+        app:layout_constraintTop_toBottomOf="@id/rlRepeatPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Кнопка "Далее" -->
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        app:layout_constraintTop_toBottomOf="@id/cbAgreement"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Кнопка "Назад" -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        app:layout_constraintTop_toBottomOf="@id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

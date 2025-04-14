@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clSettingsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Заголовок "Регистрация" -->
+    <TextView
+        android:id="@+id/tvRegisterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Настройки"
+        android:textColor="#101828"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Блок профиля -->
+    <LinearLayout
+        android:id="@+id/llProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintTop_toBottomOf="@id/tvRegisterTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="40dp">
+
+        <!-- Аватар пользователя -->
+
+        <!-- Блок с именем и email -->
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="email"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile_placeholder" />
+
+        <LinearLayout
+            android:id="@+id/llUserInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Имя Фамилия"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#29183B"/>
+
+            <TextView
+                android:id="@+id/tvUserEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email@example.com"
+                android:textSize="14sp"
+                android:textColor="#ADB5BD"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Разделитель -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        app:layout_constraintTop_toBottomOf="@id/llProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Меню настроек -->
+    <LinearLayout
+        android:id="@+id/llSettingsMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Пункт "Мои бронирования" -->
+        <TextView
+            android:id="@+id/tvMyBookings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Мои бронирования"
+            android:drawableLeft="@drawable/uber_taxi"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="#29183B"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Пункт "Тема" -->
+        <TextView
+            android:id="@+id/tvTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тема"
+            android:drawableLeft="@drawable/ic_sun"
+            android:drawablePadding="8dp"
+            android:textColor="#29183B"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Пункт "Уведомления" -->
+        <TextView
+            android:id="@+id/tvNotifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Уведомления"
+            android:drawableLeft="@drawable/ic_bell"
+            android:drawablePadding="8dp"
+            android:textColor="#29183B"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Пункт "Подключить свой автомобиль" -->
+        <TextView
+            android:id="@+id/tvConnectCar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Подключить свой автомобиль"
+            android:drawableLeft="@drawable/ic_banknotes"
+            android:drawablePadding="8dp"
+            android:textColor="#29183B"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Пункт "Помощь" -->
+        <TextView
+            android:id="@+id/tvHelp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Помощь"
+            android:drawableLeft="@drawable/ic_question"
+            android:drawablePadding="8dp"
+            android:textColor="#29183B"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Пункт "Пригласи друга" -->
+        <TextView
+            android:id="@+id/tvInviteFriend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Пригласи друга"
+            android:drawableLeft="@drawable/ic_msg"
+            android:drawablePadding="8dp"
+            android:textColor="#29183B"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- Нижняя навигационная панель -->
+    <LinearLayout
+        android:id="@+id/llBottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_home"
+            android:contentDescription="Домой" />
+
+        <ImageButton
+            android:id="@+id/btnFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorite"
+            android:contentDescription="Избранное" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="Настройки" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
