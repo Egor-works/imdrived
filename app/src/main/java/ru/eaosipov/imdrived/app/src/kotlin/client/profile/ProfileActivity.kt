@@ -22,27 +22,36 @@ import ru.eaosipov.imdrived.app.src.kotlin.client.main.MainActivity
 import ru.eaosipov.imdrived.app.src.kotlin.client.settings.SettingsActivity
 import ru.eaosipov.imdrived.databinding.ActivityProfileBinding
 
+/**
+ * ProfileActivity - экран профиля пользователя.
+ * Позволяет просматривать и редактировать данные профиля, включая аватар.
+ */
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var authRepository: AuthRepository
     private lateinit var ivAvatar: ImageView
 
+    // Флаг, указывающий, было ли загружено новое фото
     private var isNewPhotoUploaded = false
+    // URI нового фото профиля
     private var newPhotoUri: Uri? = null
+    // Лончер для выбора изображения из галереи
     private lateinit var profileImagePickerLauncher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Инициализация ViewBinding
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Получаем ссылку на ImageView для аватара
         ivAvatar = findViewById(R.id.ivAvatar)
 
-        // Инициализация лончеров после установки binding
+        // Регистрируем лончер для выбора изображения
         profileImagePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
             uri?.let {
-                // Сохраняем доступ на чтение выбранного файла
+                // Сохраняем разрешение на чтение выбранного файла
                 val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
                 contentResolver.takePersistableUriPermission(it, takeFlags)
                 newPhotoUri = it
@@ -52,16 +61,21 @@ class ProfileActivity : AppCompatActivity() {
             } ?: Snackbar.make(binding.root, "Фотография не выбрана.", Snackbar.LENGTH_SHORT).show()
         }
 
+        // Инициализация репозитория авторизации
         authRepository = AuthRepository(applicationContext)
 
-        // Загружаем текущий аватар и профильные данные
+        // Загружаем данные пользователя
         loadUserData()
 
+        // Настраиваем обработчики кликов
         setupClickListeners()
     }
 
+    /**
+     * Загружает данные пользователя из базы данных и обновляет UI.
+     */
     private fun loadUserData() {
-        // Получаем email текущего пользователя из SharedPreferences или другого источника
+        // Получаем email текущего пользователя из SharedPreferences
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val userEmail = prefs.getString("user_email", null)
 
@@ -74,17 +88,16 @@ class ProfileActivity : AppCompatActivity() {
                     userRepository.getUserByEmail(userEmail)
                 }
                 if (userData != null) {
-                    // Обновляем UI
+                    // Обновляем UI данными пользователя
                     binding.tvUserFullName.text = "${userData.firstName} ${userData.lastName}"
                     binding.tvEmail.text = userData.email
                     // Если URI фото не пустой, устанавливаем его в ImageView
                     userData.profilePhotoUri?.let { photoUriString ->
                         val photoUri = Uri.parse(photoUriString)
                         binding.ivAvatar.setImageURI(photoUri)
-
                     }
-                    binding.tvGender.text =  userData.gender
-                    // Google email — заглушка
+                    binding.tvGender.text = userData.gender
+                    // Заглушка для Google email
                     binding.tvGoogleEmail.text = "google@mail.com"
                 } else {
                     binding.tvUserFullName.text = "Пользователь не найден"
@@ -97,6 +110,9 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Настраивает обработчики кликов для элементов UI.
+     */
     private fun setupClickListeners() {
         // При нажатии на аватар открываем галерею для выбора нового фото
         binding.ivAvatar.setOnClickListener {
@@ -110,15 +126,8 @@ class ProfileActivity : AppCompatActivity() {
 
         // Обработка клика по панели "Выйти из профиля"
         binding.llSignOut.setOnClickListener {
-            // Очищаем токен и профильные данные
+            // Очищаем токен и переходим на экран входа
             authRepository.clearToken()
-            //getSharedPreferences("app_prefs", MODE_PRIVATE).edit().apply {
-            //    remove("user_email")
-            //    remove("user_gender")
-            //    remove("profile_photo_uri")
-            //    apply()
-            //}
-            // Переходим на экран входа
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -131,9 +140,6 @@ class ProfileActivity : AppCompatActivity() {
         }
         // Нажатие на иконку избранное
         binding.btnFavorites.setOnClickListener {
-            // TODO: Сделать потом экран избранное
-            //startActivity(Intent(this, FavoritesActivity::class.java))
-            //finish()
             Snackbar.make(binding.root, "Избранное", Snackbar.LENGTH_SHORT).show()
         }
         // Нажатие на иконку шестеренки

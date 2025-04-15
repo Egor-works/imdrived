@@ -13,28 +13,41 @@ import ru.eaosipov.imdrived.databinding.ActivitySuccessBookingBinding
  */
 class SuccessBookingActivity : AppCompatActivity() {
 
+    // Привязка к макету ActivitySuccessBookingBinding для работы с элементами интерфейса
     private lateinit var binding: ActivitySuccessBookingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Инициализация привязки к макету
         binding = ActivitySuccessBookingBinding.inflate(layoutInflater)
+        // Установка корневого представления для активности
         setContentView(binding.root)
 
+        // Настройка обработчиков кликов для элементов интерфейса
         setupClickListeners()
     }
 
+    /**
+     * Настраивает обработчики кликов для элементов интерфейса.
+     */
     private fun setupClickListeners() {
-        // При нажатии на текст "Перейти к своим бронированиям"
+        // Обработчик клика по тексту "Перейти к своим бронированиям"
         binding.tvGoToBookings.setOnClickListener {
-            // Если экран бронирований уже реализован, переходите к нему:
-            startActivity(Intent(this, MyBookingsActivity::class.java))
+            // Создание Intent для перехода на экран списка бронирований
+            val intent = Intent(this, MyBookingsActivity::class.java)
+            // Запуск активности
+            startActivity(intent)
+            // Завершение текущей активности
             finish()
-            //Toast.makeText(this, "Переход в избранное!", Toast.LENGTH_SHORT).show()
         }
 
-        // Кнопка "Далее" ведет на главный экран
+        // Обработчик клика по кнопке "Далее"
         binding.btnHome.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            // Создание Intent для перехода на главный экран
+            val intent = Intent(this, MainActivity::class.java)
+            // Запуск активности
+            startActivity(intent)
+            // Завершение текущей активности
             finish()
         }
     }

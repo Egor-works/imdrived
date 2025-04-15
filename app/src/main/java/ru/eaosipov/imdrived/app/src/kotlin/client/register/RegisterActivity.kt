@@ -16,53 +16,55 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
-    private var isPasswordVisible = false
-    private var isRepeatPasswordVisible = false
+    private var isPasswordVisible = false // Флаг видимости пароля
+    private var isRepeatPasswordVisible = false // Флаг видимости повторного пароля
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityRegisterBinding.inflate(layoutInflater) // Инициализация ViewBinding
+        setContentView(binding.root) // Установка корневого View
 
-        setupUI()
+        setupUI() // Настройка пользовательского интерфейса
     }
 
+    /**
+     * Настройка пользовательского интерфейса.
+     * Добавляет обработчики кликов для кнопок и полей ввода.
+     */
     private fun setupUI() {
         // Обработка показа/скрытия пароля
         binding.ivTogglePassword.setOnClickListener {
-            isPasswordVisible = !isPasswordVisible
+            isPasswordVisible = !isPasswordVisible // Инвертируем флаг видимости
             binding.etPassword.transformationMethod = if (isPasswordVisible) {
-                HideReturnsTransformationMethod.getInstance()
+                HideReturnsTransformationMethod.getInstance() // Показываем пароль
             } else {
-                PasswordTransformationMethod.getInstance()
+                PasswordTransformationMethod.getInstance() // Скрываем пароль
             }
-            binding.etPassword.setSelection(binding.etPassword.text.length)
+            binding.etPassword.setSelection(binding.etPassword.text.length) // Устанавливаем курсор в конец текста
         }
 
+        // Обработка показа/скрытия повторного пароля
         binding.ivToggleRepeatPassword.setOnClickListener {
-            isRepeatPasswordVisible = !isRepeatPasswordVisible
+            isRepeatPasswordVisible = !isRepeatPasswordVisible // Инвертируем флаг видимости
             binding.etRepeatPassword.transformationMethod = if (isRepeatPasswordVisible) {
-                HideReturnsTransformationMethod.getInstance()
+                HideReturnsTransformationMethod.getInstance() // Показываем пароль
             } else {
-                PasswordTransformationMethod.getInstance()
+                PasswordTransformationMethod.getInstance() // Скрываем пароль
             }
-            binding.etRepeatPassword.setSelection(binding.etRepeatPassword.text.length)
+            binding.etRepeatPassword.setSelection(binding.etRepeatPassword.text.length) // Устанавливаем курсор в конец текста
         }
 
         // Обработка кнопки "Далее"
         binding.btnNext.setOnClickListener {
-            if (!validateInput()) {
-                return@setOnClickListener
+            if (!validateInput()) { // Проверяем валидность введённых данных
+                return@setOnClickListener // Если данные невалидны, прерываем выполнение
             }
             // Если все поля валидны, переходим к следующему этапу регистрации.
-            // Создаём Intent для запуска экрана RegistrationStep2Activity.
             val intent = Intent(this, RegistrationStep2Activity::class.java).apply {
-                putExtra("email", binding.etEmail.text.toString().trim())
-                putExtra("password", binding.etPassword.text.toString())
+                putExtra("email", binding.etEmail.text.toString().trim()) // Передаём email
+                putExtra("password", binding.etPassword.text.toString()) // Передаём пароль
             }
-            startActivity(intent)
-            // При необходимости можно завершить текущую активность:
-            // finish()
+            startActivity(intent) // Запускаем следующий экран
         }
 
         // Обработка кнопки "Назад"
@@ -71,11 +73,14 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    // Функция валидации данных
+    /**
+     * Проверяет корректность введённых данных.
+     * @return true, если все поля валидны, иначе false.
+     */
     private fun validateInput(): Boolean {
-        val email = binding.etEmail.text.toString().trim()
-        val password = binding.etPassword.text.toString()
-        val repeatPassword = binding.etRepeatPassword.text.toString()
+        val email = binding.etEmail.text.toString().trim() // Получаем email
+        val password = binding.etPassword.text.toString() // Получаем пароль
+        val repeatPassword = binding.etRepeatPassword.text.toString() // Получаем повторный пароль
 
         // Проверка email по паттерну "name@domainname.ru"
         val emailPattern = Regex("^[\\w.-]+@[\\w.-]+\\.ru\$")
@@ -102,6 +107,6 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
 
-        return true
+        return true // Все проверки пройдены
     }
 }

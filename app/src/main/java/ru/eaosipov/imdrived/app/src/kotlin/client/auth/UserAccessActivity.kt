@@ -1,5 +1,7 @@
+// Пакет, в котором находится данный класс  
 package ru.eaosipov.imdrived.app.src.kotlin.client.auth
 
+// Импорт необходимых классов и библиотек  
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -16,21 +18,40 @@ import ru.eaosipov.imdrived.databinding.ActivityAuthChoiceBinding
  */
 class UserAccessActivity : AppCompatActivity() {
 
+    // Переменная для привязки представления (View Binding)  
     private lateinit var viewBinding: ActivityAuthChoiceBinding
 
+    /**
+     * Метод onCreate вызывается при создании активности.
+     * Здесь инициализируются все компоненты интерфейса и логика.
+     *
+     * @param savedInstanceState Сохранённое состояние активности (если есть).
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Инициализация View Binding для данного экрана  
         viewBinding = ActivityAuthChoiceBinding.inflate(layoutInflater)
+
+        // Установка корневого представления активности  
         setContentView(viewBinding.root)
 
-        // Нажатие на кнопку входа перенаправляет к окну авторизации
+        // Обработчик нажатия на кнопку "Войти"  
         viewBinding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            // Создание Intent для перехода к экрану авторизации (LoginActivity)  
+            val loginIntent = Intent(this, LoginActivity::class.java)
+
+            // Запуск активности авторизации  
+            startActivity(loginIntent)
         }
 
-        // Нажатие на кнопку регистрации перенаправляет к окну создания учётной записи
+        // Обработчик нажатия на кнопку "Зарегистрироваться"  
         viewBinding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            // Создание Intent для перехода к экрану регистрации (RegisterActivity)  
+            val registerIntent = Intent(this, RegisterActivity::class.java)
+
+            // Запуск активности регистрации  
+            startActivity(registerIntent)
         }
     }
 }

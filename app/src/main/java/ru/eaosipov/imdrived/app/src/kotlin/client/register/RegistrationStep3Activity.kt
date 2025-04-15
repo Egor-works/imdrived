@@ -22,6 +22,8 @@ import ru.eaosipov.imdrived.databinding.ActivityRegistrationStep3Binding
 
 /**
  * RegistrationStep3Activity — экран для загрузки документов и фото пользователя.
+ * Позволяет пользователю загрузить фото профиля, водительского удостоверения и паспорта,
+ * а также ввести номер и дату выдачи водительского удостоверения.
  */
 class RegistrationStep3Activity : AppCompatActivity() {
 
@@ -45,7 +47,7 @@ class RegistrationStep3Activity : AppCompatActivity() {
     private var passportPhotoUri: Uri? = null
     private var photoUri: Uri? = null
 
-    // Лончеры объявим как lateinit и инициализируем в onCreate
+    // Лончеры для выбора изображений из галереи
     private lateinit var profileImagePickerLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var licenseImagePickerLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var passportImagePickerLauncher: ActivityResultLauncher<Array<String>>
@@ -53,11 +55,10 @@ class RegistrationStep3Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_registration_step3)
         binding = ActivityRegistrationStep3Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Инициализация лончеров после установки binding
+        // Инициализация лончеров для выбора изображений
         profileImagePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
             uri?.let {
                 // Сохраняем доступ на чтение выбранного файла
@@ -93,8 +94,7 @@ class RegistrationStep3Activity : AppCompatActivity() {
             } ?: Snackbar.make(binding.root, "Фотография не выбрана.", Snackbar.LENGTH_SHORT).show()
         }
 
-
-        // Инициализация View
+        // Инициализация View-элементов
         ivProfilePicture = findViewById(R.id.ivProfilePicture)
         etLicenseNumber = findViewById(R.id.etLicenseNumber)
         etIssueDate = findViewById(R.id.etIssueDate)
@@ -110,36 +110,24 @@ class RegistrationStep3Activity : AppCompatActivity() {
         etLicenseNumber.addTextChangedListener(textWatcher)
         etIssueDate.addTextChangedListener(textWatcher)
 
-        // Обработка нажатия на поле даты рождения
+        // Обработка нажатия на поле даты выдачи
         etIssueDate.setOnClickListener { showDatePickerDialog() }
         etIssueDate.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) showDatePickerDialog()
         }
 
-        // Обработка нажатия на иконку фото профиля (опционально)
+        // Обработка нажатия на иконку фото профиля
         ivProfilePicture.setOnClickListener {
-            // TODO: Реализуйте открытие галереи или камеры для выбора фото профиля.
-            //openGalleryForImage(REQUEST_CODE_PHOTO)
             profileImagePickerLauncher.launch(arrayOf("image/*"))
         }
 
         // Обработка нажатия на кнопку "Загрузить фото" для водительского удостоверения
         btnUploadLicense.setOnClickListener {
-            // TODO: Реализуйте открытие галереи или камеры для загрузки фото водительского удостоверения.
-            // После успешного выбора фото:
-            //isLicensePhotoUploaded = true
-            //updateNextButtonState()
-            //openGalleryForImage(REQUEST_CODE_LICENSE)
             licenseImagePickerLauncher.launch(arrayOf("image/*"))
         }
 
         // Обработка нажатия на кнопку "Загрузить фото" для паспорта
         btnUploadPassport.setOnClickListener {
-            // TODO: Реализуйте открытие галереи или камеры для загрузки фото паспорта.
-            // После успешного выбора фото:
-            //isPassportPhotoUploaded = true
-            //updateNextButtonState()
-            //openGalleryForImage(REQUEST_CODE_PASSPORT)
             passportImagePickerLauncher.launch(arrayOf("image/*"))
         }
 
@@ -162,16 +150,11 @@ class RegistrationStep3Activity : AppCompatActivity() {
                     profilePhotoUri = photoUri?.toString()
                 )
 
-                val email = intent.getStringExtra("email")
-                val registrationDataStep3 = Bundle().apply {
-                    putString("email", email)
-                }
-
                 // Здесь вызывается ViewModel для сохранения данных
                 val registrationViewModel = RegistrationViewModel(applicationContext)
                 registrationViewModel.saveRegistrationData(userData) { success ->
                     if (success) {
-                        // Переход на главный экран или экран успешной регистрации
+                        // Переход на экран успешной регистрации
                         val intent = Intent(this, SuccessActivity::class.java)
                         intent.putExtra("email", extras?.getString("email") ?: "dima@mail.ru")
                         startActivity(intent)
@@ -187,11 +170,13 @@ class RegistrationStep3Activity : AppCompatActivity() {
 
         // Обработка нажатия кнопки "Назад"
         btnBack.setOnClickListener {
-            // Возврат на предыдущий экран регистрации (шаг 2)
-            finish()
+            finish() // Возврат на предыдущий экран регистрации (шаг 2)
         }
     }
 
+    /**
+     * Показывает диалог выбора даты для поля даты выдачи.
+     */
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -219,19 +204,27 @@ class RegistrationStep3Activity : AppCompatActivity() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
-    // Обновление состояния кнопки "Далее"
+    /**
+     * Обновляет состояние кнопки "Далее" в зависимости от заполненности полей.
+     */
     private fun updateNextButtonState() {
         btnNext.isEnabled = areRequiredFieldsFilled() && isLicensePhotoUploaded && isPassportPhotoUploaded
     }
 
-    // Проверка, что обязательные поля заполнены
+    /**
+     * Проверяет, заполнены ли обязательные поля.
+     * @return true, если все обязательные поля заполнены, иначе false.
+     */
     private fun areRequiredFieldsFilled(): Boolean {
         val licenseNumber = etLicenseNumber.text.toString().trim()
         val issueDate = etIssueDate.text.toString().trim()
         return licenseNumber.isNotEmpty() && issueDate.isNotEmpty()
     }
 
-    // Валидация введённых данных
+    /**
+     * Проверяет корректность введённых данных.
+     * @return true, если данные корректны, иначе false.
+     */
     private fun validateInput(): Boolean {
         val licenseNumber = etLicenseNumber.text.toString().trim()
         val issueDate = etIssueDate.text.toString().trim()

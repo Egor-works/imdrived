@@ -16,10 +16,12 @@ import java.util.Calendar
 import java.util.Locale
 
 /**
- * RegistrationStep2Activity — экран для ввода дополнительных данных.
+ * RegistrationStep2Activity — экран для ввода дополнительных данных пользователя.
+ * Позволяет ввести ФИО, дату рождения и пол, а также перейти к следующему шагу регистрации.
  */
 class RegistrationStep2Activity : AppCompatActivity() {
 
+    // Объявление переменных для View-элементов
     private lateinit var etLastName: EditText
     private lateinit var etFirstName: EditText
     private lateinit var etMiddleName: EditText
@@ -32,7 +34,7 @@ class RegistrationStep2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step2)
 
-        // Инициализация View из разметки
+        // Инициализация View-элементов из разметки
         etLastName = findViewById(R.id.etLastName)
         etFirstName = findViewById(R.id.etFirstName)
         etMiddleName = findViewById(R.id.etMiddleName)
@@ -44,11 +46,12 @@ class RegistrationStep2Activity : AppCompatActivity() {
         // Изначально кнопка "Далее" выключена (установлено в разметке)
         updateNextButtonState()
 
-        // Добавляем слушатели для обязательных полей
+        // Добавление слушателей изменений текста для обязательных полей
         etLastName.addTextChangedListener(textWatcher)
         etFirstName.addTextChangedListener(textWatcher)
         etBirthDate.addTextChangedListener(textWatcher)
 
+        // Слушатель выбора пола в RadioGroup
         rgGender.setOnCheckedChangeListener { _, _ ->
             updateNextButtonState()
         }
@@ -62,8 +65,11 @@ class RegistrationStep2Activity : AppCompatActivity() {
         // Обработка нажатия кнопки "Далее"
         btnNext.setOnClickListener {
             if (validateInput()) {
+                // Получение данных из предыдущего шага регистрации
                 val email = intent.getStringExtra("email")
                 val password = intent.getStringExtra("password")
+
+                // Создание Bundle для передачи данных на следующий шаг
                 val registrationDataStep2 = Bundle().apply {
                     putString("email", email)
                     putString("password", password)
@@ -71,10 +77,13 @@ class RegistrationStep2Activity : AppCompatActivity() {
                     putString("firstName", etFirstName.text.toString().trim())
                     putString("middleName", etMiddleName.text.toString().trim())
                     putString("birthDate", etBirthDate.text.toString().trim())
-                    putString("gender", if (rgGender.checkedRadioButtonId == R.id.rbMale) "Мужской" else "Женский")
+                    putString(
+                        "gender",
+                        if (rgGender.checkedRadioButtonId == R.id.rbMale) "Мужской" else "Женский"
+                    )
                 }
 
-                // Если данные валидны, завершаем регистрацию и переходим на главный экран
+                // Переход на следующий шаг регистрации
                 val intent = Intent(this, RegistrationStep3Activity::class.java)
                 intent.putExtras(registrationDataStep2)
                 startActivity(intent)
@@ -84,11 +93,14 @@ class RegistrationStep2Activity : AppCompatActivity() {
 
         // Обработка нажатия кнопки "Назад"
         btnBack.setOnClickListener {
-            // Возвращаемся к предыдущему экрану регистрации
+            // Возврат на предыдущий экран регистрации
             finish()
         }
     }
 
+    /**
+     * Показывает диалоговое окно выбора даты.
+     */
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -107,21 +119,27 @@ class RegistrationStep2Activity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    // Текстовый слушатель для обновления состояния кнопки "Далее"
+    // Слушатель изменений текста для обновления состояния кнопки "Далее"
     private val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             updateNextButtonState()
         }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
-    // Обновление состояния кнопки "Далее"
+    /**
+     * Обновляет состояние кнопки "Далее" в зависимости от заполненности обязательных полей.
+     */
     private fun updateNextButtonState() {
         btnNext.isEnabled = areRequiredFieldsFilled()
     }
 
-    // Проверка, что обязательные поля заполнены
+    /**
+     * Проверяет, заполнены ли все обязательные поля.
+     * @return true, если все обязательные поля заполнены, иначе false.
+     */
     private fun areRequiredFieldsFilled(): Boolean {
         val lastName = etLastName.text.toString().trim()
         val firstName = etFirstName.text.toString().trim()
@@ -131,7 +149,10 @@ class RegistrationStep2Activity : AppCompatActivity() {
         return lastName.isNotEmpty() && firstName.isNotEmpty() && birthDate.isNotEmpty() && isGenderSelected
     }
 
-    // Валидация введённых данных
+    /**
+     * Проверяет корректность введённых данных.
+     * @return true, если данные валидны, иначе false.
+     */
     private fun validateInput(): Boolean {
         val lastName = etLastName.text.toString().trim()
         val firstName = etFirstName.text.toString().trim()
@@ -139,18 +160,22 @@ class RegistrationStep2Activity : AppCompatActivity() {
 
         // Проверка заполненности обязательных полей
         if (lastName.isEmpty() || firstName.isEmpty() || birthDate.isEmpty() || rgGender.checkedRadioButtonId == -1) {
-            Snackbar.make(findViewById(android.R.id.content),
+            Snackbar.make(
+                findViewById(android.R.id.content),
                 "Пожалуйста, заполните все обязательные поля.",
-                Snackbar.LENGTH_SHORT).show()
+                Snackbar.LENGTH_SHORT
+            ).show()
             return false
         }
 
         // Проверка корректности формата даты рождения (MM/DD/YYYY)
         val datePattern = Regex("^(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])/\\d{4}$")
         if (!datePattern.matches(birthDate)) {
-            Snackbar.make(findViewById(android.R.id.content),
+            Snackbar.make(
+                findViewById(android.R.id.content),
                 "Введите корректную дату рождения.",
-                Snackbar.LENGTH_SHORT).show()
+                Snackbar.LENGTH_SHORT
+            ).show()
             return false
         }
 

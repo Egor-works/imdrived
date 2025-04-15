@@ -10,46 +10,51 @@ import android.content.Context
 import ru.eaosipov.imdrived.app.src.kotlin.service.repository.AuthRepository
 
 /**
- * SplashViewModel - отвечает за логику загрузки и навигацию.
+ * SplashViewModel - ViewModel для экрана загрузки (SplashScreen).
+ * Отвечает за логику проверки авторизации пользователя и определения следующего экрана.
  */
 class SplashViewModel(context: Context) : ViewModel() {
 
+    // MutableLiveData для хранения направления навигации
     private val _navigateTo = MutableLiveData<Destination>()
+    // LiveData для наблюдения за направлением навигации (только для чтения)
     val navigateTo: LiveData<Destination> get() = _navigateTo
 
+    // Репозиторий для работы с авторизацией
     private val authRepository = AuthRepository(context)
-    // Получаем SharedPreferences для проверки, пройден ли онбординг
+    // SharedPreferences для проверки состояния онбординга
     private val sharedPreferences = context.getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
+    // Блок инициализации ViewModel
     init {
         viewModelScope.launch {
-            delay(2000) // Ждем 2 секунды
-            //_navigateTo.postValue(Destination.AUTH_CHOICE)
+            // Искусственная задержка для отображения SplashScreen (2 секунды)
+            delay(2000)
+
+            // Проверяем, авторизован ли пользователь
             if (authRepository.isUserLoggedIn()) {
-                _navigateTo.postValue(Destination.MAIN) // Если пользователь авторизован — главный экран
+                // Если авторизован, переходим на главный экран
+                _navigateTo.postValue(Destination.MAIN)
             } else {
-                // Проверяем, прошёл ли пользователь онбординг
+                // Если не авторизован, проверяем, пройден ли онбординг
                 val onboardingCompleted = sharedPreferences.getBoolean("onboarding_complete", false)
                 if (!onboardingCompleted) {
-                    _navigateTo.postValue(Destination.ONBOARDING) // Переход на онбординг
+                    // Если онбординг не пройден, переходим на экран онбординга
+                    _navigateTo.postValue(Destination.ONBOARDING)
                 } else {
-                    _navigateTo.postValue(Destination.AUTH_CHOICE) // Переход на экран входа/регистрации
+                    // Если онбординг пройден, переходим на экран выбора входа/регистрации
+                    _navigateTo.postValue(Destination.AUTH_CHOICE)
                 }
             }
-            /*if (authRepository.isUserLoggedIn()) {
-                _navigateTo.postValue(Destination.MAIN) // Переход на главный экран
-            } else {
-                _navigateTo.postValue(Destination.AUTH_CHOICE) // Переход на экран входа
-            }*/
         }
     }
 }
 
 /**
- * Перечисление возможных направлений перехода после экрана загрузки.
+ * Перечисление возможных направлений навигации после SplashScreen.
  */
 enum class Destination {
-    AUTH_CHOICE, // экран выбора входа/регистрации
-    MAIN,
-    ONBOARDING
+    AUTH_CHOICE, // Экран выбора входа или регистрации
+    MAIN,        // Главный экран приложения
+    ONBOARDING   // Экран онбординга (первый запуск приложения)
 }

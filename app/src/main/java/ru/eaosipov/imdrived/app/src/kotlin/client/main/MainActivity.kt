@@ -19,61 +19,63 @@ import ru.eaosipov.imdrived.app.src.kotlin.client.search.SearchResultsActivity
 import ru.eaosipov.imdrived.app.src.kotlin.client.settings.SettingsActivity
 import ru.eaosipov.imdrived.databinding.ActivityMainBinding
 
+/**
+ * MainActivity - главный экран приложения, отображающий список доступных автомобилей.
+ * Позволяет выполнять поиск, переход к деталям автомобиля, бронирование и навигацию по разделам.
+ */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var carAdapter: CarAdapter
+    private lateinit var binding: ActivityMainBinding // ViewBinding для доступа к элементам интерфейса
+    private lateinit var carAdapter: CarAdapter // Адаптер для RecyclerView с автомобилями
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Инициализация ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupRecyclerView()
-        setupListeners()
-        loadCarData()
+        setupRecyclerView() // Настройка RecyclerView
+        setupListeners() // Настройка обработчиков событий
+        loadCarData() // Загрузка данных об автомобилях
     }
 
+    /**
+     * Настраивает RecyclerView для отображения списка автомобилей.
+     */
     private fun setupRecyclerView() {
+        // Инициализация адаптера с обработчиками кликов
         carAdapter = CarAdapter { car, action ->
             when (action) {
                 CarAdapter.Action.BOOK -> {
-                    // TODO: Сделать экран "Оформление аренды"
-                    // Переход на экран "Оформление аренды"
-                    //startActivity(Intent(this, RentCarActivity::class.java).apply {
-                    //    putExtra("car_id", car.id)
-                    //})
-                    //Snackbar.make(binding.root, "Оформление аренды", Snackbar.LENGTH_SHORT).show()
+                    // Переход на экран бронирования с передачей ID автомобиля
                     val intent = Intent(this, RentCarActivity::class.java)
-                    intent.putExtra("car_id", car.id) // передаем ID авто
+                    intent.putExtra("car_id", car.id)
                     startActivity(intent)
                 }
                 CarAdapter.Action.DETAILS -> {
-                    // TODO: Сделать экран "Детали"
-                    // Переход на экран "Детали"
-                    //startActivity(Intent(this, CarDetailsActivity::class.java).apply {
-                    //    putExtra("car_id", car.id)
-                    //})
-                    //Snackbar.make(binding.root, "Детали", Snackbar.LENGTH_SHORT).show()
+                    // Переход на экран деталей автомобиля с передачей ID
                     val intent = Intent(this, CarDetailsActivity::class.java)
-                    intent.putExtra("car_id", car.id) // передаем ID авто
+                    intent.putExtra("car_id", car.id)
                     startActivity(intent)
                 }
             }
         }
+        // Настройка RecyclerView
         binding.rvCars.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = carAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity) // Линейный макет (вертикальный список)
+            adapter = carAdapter // Установка адаптера
         }
     }
 
+    /**
+     * Настраивает обработчики событий для элементов интерфейса.
+     */
     private fun setupListeners() {
-        // Обработка нажатия на кнопку поиска
+        // Обработка нажатия на иконку поиска
         binding.ivSearchIcon.setOnClickListener {
             val query = binding.etSearch.text.toString().trim()
             if (query.isNotEmpty()) {
-                // TODO: Сделать экран "Результаты поиска"
-                // Переход на экран "Результаты поиска"
+                // Переход на экран результатов поиска с передачей запроса
                 startActivity(Intent(this, SearchResultsActivity::class.java).apply {
                     putExtra("search_query", query)
                 })
@@ -83,55 +85,60 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Обработка кнопки "Повторить попытку" при ошибке загрузки
+        // Обработка нажатия на кнопку "Повторить попытку" при ошибке загрузки
         binding.btnRetry.setOnClickListener {
             loadCarData()
         }
 
-        // Нижняя навигационная панель:
+        // Навигационная панель внизу экрана:
         binding.btnHome.setOnClickListener {
+            // Переход на главный экран (текущий экран)
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         binding.btnFavorites.setOnClickListener {
-            // TODO: Сделать потом экран избранное
+            // Переход на экран избранного
             startActivity(Intent(this, FavoriteActivity::class.java))
             finish()
-            //Snackbar.make(binding.root, "Избранное", Snackbar.LENGTH_SHORT).show()
         }
         binding.btnSettings.setOnClickListener {
-            // Так как мы уже на экране настроек, можно оставить пустым или просто показать Snackbar.
+            // Переход на экран настроек
             startActivity(Intent(this, SettingsActivity::class.java))
             finish()
         }
     }
 
+    /**
+     * Загружает данные об автомобилях из базы данных.
+     */
     private fun loadCarData() {
-        // Показываем индикатор загрузки и скрываем ошибки
+        // Показываем индикатор загрузки и скрываем сообщение об ошибке
         binding.progressBar.visibility = android.view.View.VISIBLE
         binding.layoutError.visibility = android.view.View.GONE
 
         lifecycleScope.launch {
-            //try {
-                // Получение данных из базы данных
+            try {
+                // Получение списка автомобилей из базы данных
                 val cars = fetchCarsFromDatabase()
-                // Обновляем адаптер с данными
+                // Обновление адаптера новыми данными
                 carAdapter.submitList(cars)
-            //} //catch (e: Exception) {
-                // Обработка ошибок
-              //  binding.layoutError.visibility = android.view.View.VISIBLE
-            //} finally {
+            } catch (e: Exception) {
+                // В случае ошибки показываем сообщение
+                binding.layoutError.visibility = android.view.View.VISIBLE
+            } finally {
                 // Скрываем индикатор загрузки
                 binding.progressBar.visibility = android.view.View.GONE
             }
-        //}
+        }
     }
 
+    /**
+     * Получает список автомобилей из базы данных (выполняется в фоновом потоке).
+     */
     private suspend fun fetchCarsFromDatabase(): List<Car> = withContext(Dispatchers.IO) {
-        // Создание или получение экземпляра базы данных
+        // Получение экземпляра базы данных
         val db = AppDatabase.getDatabase(applicationContext)
-        // Выполнение запроса к базе данных
+        // Запрос всех автомобилей из базы
         db.carDao().getAllCars()
     }
-
 }

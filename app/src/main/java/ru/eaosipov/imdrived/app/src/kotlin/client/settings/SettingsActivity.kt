@@ -37,6 +37,10 @@ class SettingsActivity : AppCompatActivity() {
         setupClickListeners()
     }
 
+    /**
+     * Загружает данные профиля пользователя из базы данных.
+     * Обновляет UI с полученными данными (имя, email, аватар).
+     */
     private fun loadUserProfile() {
         // Получаем email текущего пользователя из SharedPreferences или другого источника
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
@@ -70,6 +74,9 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Настраивает обработчики кликов для всех элементов UI.
+     */
     private fun setupClickListeners() {
         // При нажатии на блок профиля переходим на экран "Профиль"
         binding.llProfile.setOnClickListener {
@@ -78,9 +85,6 @@ class SettingsActivity : AppCompatActivity() {
 
         // Переход "Мои бронирования"
         binding.tvMyBookings.setOnClickListener {
-            // TODO: Релизовать переход на мои "Мои бронирования" (когда создам сам экран)
-            //startActivity(Intent(this, MyBookingsActivity::class.java))
-            //Snackbar.make(binding.root, "Мои бронирования", Snackbar.LENGTH_SHORT).show()
             val intent = Intent(this, MyBookingsActivity::class.java)
             startActivity(intent)
         }
@@ -97,7 +101,6 @@ class SettingsActivity : AppCompatActivity() {
 
         // Переход "Подключить свой автомобиль"
         binding.tvConnectCar.setOnClickListener {
-            // TODO: Релизовать переход на "Подключить свой автомобиль" (когда создам сам экран)
             startActivity(Intent(this, ConnectCarActivity::class.java))
             Snackbar.make(binding.root, "Подключить свой автомобиль", Snackbar.LENGTH_SHORT).show()
         }
@@ -121,7 +124,6 @@ class SettingsActivity : AppCompatActivity() {
             // Переход на экран избранное
             startActivity(Intent(this, FavoriteActivity::class.java))
             finish()
-            //Snackbar.make(binding.root, "Избранное", Snackbar.LENGTH_SHORT).show()
         }
         binding.btnSettings.setOnClickListener {
             // Так как мы уже на экране настроек, можно оставить пустым или просто показать Snackbar.

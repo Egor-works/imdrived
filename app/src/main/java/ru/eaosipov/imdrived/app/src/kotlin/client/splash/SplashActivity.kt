@@ -16,37 +16,37 @@ import ru.eaosipov.imdrived.databinding.ActivitySplashBinding
  */
 class SplashActivity : AppCompatActivity() {
 
+    // Инициализация ViewBinding для доступа к элементам макета
     private lateinit var binding: ActivitySplashBinding
-    private lateinit var viewModel: SplashViewModel// by viewModels() Используем ViewModel
+
+    // Инициализация ViewModel для управления логикой экрана загрузки
+    private lateinit var viewModel: SplashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Подключаем ViewBinding
+        // Настройка ViewBinding для текущего макета
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Создаем ViewModel, передавая Context
-        viewModel = ViewModelProvider(this,  SplashViewModelFactory(applicationContext))
-            .get(SplashViewModel::class.java)
+        // Создание ViewModel с использованием фабрики, передавая контекст приложения
+        viewModel = ViewModelProvider(
+            this,
+            SplashViewModelFactory(applicationContext)
+        ).get(SplashViewModel::class.java)
 
+        // Наблюдение за изменениями в LiveData для определения, куда перейти после загрузки
         viewModel.navigateTo.observe(this) { destination ->
             when (destination) {
-                // Вместо Login выбираем UserAccessActivity
+                // Переход на экран выбора авторизации (вход/регистрация)
                 Destination.AUTH_CHOICE -> startActivity(Intent(this, UserAccessActivity::class.java))
+                // Переход на главный экран приложения
                 Destination.MAIN -> startActivity(Intent(this, MainActivity::class.java))
+                // Переход на экран онбординга (первое знакомство с приложением)
                 Destination.ONBOARDING -> startActivity(Intent(this, OnboardingActivity::class.java))
             }
+            // Завершение текущей активности после перехода
             finish()
         }
-        // Наблюдаем за статусом навигации
-        /* viewModel.navigateTo.observe(this, Observer { destination ->
-            when (destination) {
-                Destination.LOGIN -> startActivity(Intent(this, LoginActivity::class.java))
-                Destination.MAIN -> startActivity(Intent(this, MainActivity::class.java))
-            }
-            finish()
-        })*/
     }
 }
-

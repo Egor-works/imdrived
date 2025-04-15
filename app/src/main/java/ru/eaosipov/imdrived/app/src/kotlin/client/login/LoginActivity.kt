@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var authRepository: AuthRepository
-    //private val viewModel by lazy { LoginViewModel(authRepository) }
     private lateinit var userRepository: UserRepository
     private val viewModel by lazy { LoginViewModel(userRepository) }
 
@@ -33,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Инициализация ViewBinding
+        // Инициализация ViewBinding для доступа к элементам разметки
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -44,12 +43,19 @@ class LoginActivity : AppCompatActivity() {
         // Инициализация репозитория авторизации с передачей контекста
         authRepository = AuthRepository(applicationContext)
 
+        // Настройка пользовательского интерфейса
         setupUI()
+        // Наблюдение за изменениями в ViewModel (если требуется)
         observeViewModel()
     }
 
+    /**
+     * Настройка пользовательского интерфейса:
+     * - Добавление слушателей для полей ввода
+     * - Обработка нажатий на кнопки
+     */
     private fun setupUI() {
-        // Текстовые слушатели для полей ввода
+        // Слушатель изменений текста для полей ввода
         val textWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) { updateLoginButtonState() }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -62,33 +68,37 @@ class LoginActivity : AppCompatActivity() {
         binding.ivTogglePassword.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
             if (isPasswordVisible) {
+                // Показываем пароль
                 binding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
             } else {
+                // Скрываем пароль
                 binding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
             }
-            // Перемещаем курсор в конец
+            // Перемещаем курсор в конец строки
             binding.etPassword.setSelection(binding.etPassword.text.length)
         }
 
         // Обработка нажатия кнопки "Войти"
         binding.btnLogin.setOnClickListener {
-            // Проверка корректности email
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
 
+            // Проверка корректности email
             if (!isValidEmail(email)) {
                 Snackbar.make(binding.root, "Введите корректную электронную почту", Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // Отправляем запрос на авторизацию
+
+            // Отправляем запрос на авторизацию через ViewModel
             viewModel.login(email, password) { success, token, errorMsg ->
                 if (success) {
-                    // Сохраняем почту через AuthRepository
+                    // Сохраняем email в репозитории
                     authRepository.saveEmail(email)
                     // Переходим на главный экран
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
+                    // Показываем ошибку авторизации
                     Snackbar.make(binding.root, errorMsg ?: "Ошибка авторизации", Snackbar.LENGTH_SHORT).show()
                 }
             }
@@ -100,35 +110,47 @@ class LoginActivity : AppCompatActivity() {
             // Для примера - симулируем успешный вход
             viewModel.googleLogin { success, token, errorMsg ->
                 if (success) {
+                    // Сохраняем токен и переходим на главный экран
                     authRepository.saveToken(token ?: "")
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
+                    // Показываем ошибку
                     Snackbar.make(binding.root, errorMsg ?: "Ошибка авторизации через Google", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
 
-        // Кнопка "Зарегистрироваться" - переходим на экран регистрации
+        // Кнопка "Зарегистрироваться" - переход на экран регистрации
         binding.btnGoToRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
-    // Обновляем состояние кнопки "Войти": активна, если оба поля заполнены
+    /**
+     * Обновляет состояние кнопки "Войти":
+     * - Кнопка активна, если оба поля (email и пароль) заполнены
+     */
     private fun updateLoginButtonState() {
         val emailFilled = binding.etEmail.text.isNotEmpty()
         val passwordFilled = binding.etPassword.text.isNotEmpty()
         binding.btnLogin.isEnabled = emailFilled && passwordFilled
     }
 
-    // Простейшая проверка email по паттерну
+    /**
+     * Проверяет корректность email по стандартному паттерну.
+     * @param email - строка с email для проверки
+     * @return true, если email корректен
+     */
     private fun isValidEmail(email: String): Boolean {
-        // Паттерн: что-то@что-то.что-то
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    /**
+     * Наблюдение за изменениями в ViewModel (если требуется).
+     * В текущей реализации не используется.
+     */
     private fun observeViewModel() {
-        // Если требуется, можно наблюдать LiveData из ViewModel
+        // Можно добавить наблюдение за LiveData из ViewModel
     }
 }

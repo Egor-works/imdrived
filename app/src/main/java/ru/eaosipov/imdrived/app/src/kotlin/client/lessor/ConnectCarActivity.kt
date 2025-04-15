@@ -9,28 +9,35 @@ import ru.eaosipov.imdrived.app.src.kotlin.client.register.RegistrationStep2Acti
 import ru.eaosipov.imdrived.databinding.ActivityConnectCarBinding
 
 class ConnectCarActivity : AppCompatActivity() {
+    // Привязка для доступа к элементам интерфейса через View Binding
     private lateinit var binding: ActivityConnectCarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Инициализация View Binding и установка корневого представления
         binding = ActivityConnectCarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup your UI elements from Figma here
+        // Настройка пользовательского интерфейса
         setupUI()
     }
-    private fun setupUI() {
 
-        // Обработка кнопки "Далее"
+    /**
+     * Настройка элементов пользовательского интерфейса.
+     * Здесь обрабатываются клики по кнопкам и другие взаимодействия.
+     */
+    private fun setupUI() {
+        // Обработка нажатия кнопки "Далее"
         binding.btnNext.setOnClickListener {
+            // Создание Intent для перехода на следующий экран (AddCarStep1Activity)
             val intent = Intent(this, AddCarStep1Activity::class.java)
             startActivity(intent)
-
         }
 
-        // Обработка кнопки "Назад"
+        // Обработка нажатия кнопки "Назад"
         binding.btnBack.setOnClickListener {
-            finish() // Возврат на предыдущий экран
+            // Завершение текущей активности и возврат на предыдущий экран
+            finish()
         }
     }
 }
